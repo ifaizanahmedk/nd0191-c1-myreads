@@ -1,9 +1,11 @@
 import "./App.css";
 import { useEffect, useState } from "react";
-import Bookshelf from "./Bookshelf";
-import * as BooksAPI from "./BooksAPI";
+import { Route, Routes } from "react-router-dom";
+import * as BooksAPI from "./api/BooksAPI";
+import BookList from "./components/Book/BookList";
+import Search from "./components/Search/Search";
 
-const bookshelfs = [
+const bookshelf = [
 	{
 		title: "Want to Read",
 		category: "wantToRead",
@@ -19,14 +21,13 @@ const bookshelfs = [
 ];
 
 function App() {
-	const [showSearchPage, setShowSearchpage] = useState(false);
 	const [books, setBooks] = useState([]);
 
 	useEffect(() => {
-		refreshAllBooks();
+		loadAllBooks();
 	}, []);
 
-	const updateBook = (book, shelf) => {
+	const updateBookShelf = (book, shelf) => {
 		BooksAPI.update(book, shelf);
 		book.shelf = shelf;
 		setBooks((prevState) =>
@@ -34,56 +35,45 @@ function App() {
 		);
 	};
 
-	const refreshAllBooks = async () => {
+	const loadAllBooks = async () => {
 		const res = await BooksAPI.getAll();
 		setBooks(res);
 	};
 
 	return (
 		<div className="app">
-			{showSearchPage ? (
-				<div className="search-books">
-					<div className="search-books-bar">
-						<a
-							className="close-search"
-							onClick={() => setShowSearchpage(!showSearchPage)}>
-							Close
-						</a>
-						<div className="search-books-input-wrapper">
-							<input
-								type="text"
-								placeholder="Search by title, author, or ISBN"
-							/>
-						</div>
-					</div>
-					<div className="search-books-results">
-						<ol className="books-grid"></ol>
-					</div>
-				</div>
-			) : (
-				<div className="list-books">
-					<div className="list-books-title">
-						<h1>MyReads</h1>
-					</div>
-					<div className="list-books-content">
+			<Routes>
+				<Route
+					path="/search"
+					element={
+						<Search
+							myBooks={books}
+							updateBookShelf={updateBookShelf}
+						/>
+					}
+				/>
+				<Route
+					exact
+					path="/"
+					element={
+						<BookList
+							books={books}
+							bookshelf={bookshelf}
+							updateBookShelf={updateBookShelf}
+						/>
+					}
+				/>
+				<Route
+					path="*"
+					element={
 						<div>
-							{bookshelfs.map((bookshelf) => (
-								<Bookshelf
-									key={bookshelf.category}
-									books={books}
-									bookshelf={bookshelf}
-									bookShelfSwitcher={updateBook}
-								/>
-							))}
+							<h1 style={{ textAlign: "center" }}>
+								404 Not Found!
+							</h1>
 						</div>
-					</div>
-					<div className="open-search">
-						<a onClick={() => setShowSearchpage(!showSearchPage)}>
-							Add a book
-						</a>
-					</div>
-				</div>
-			)}
+					}
+				/>
+			</Routes>
 		</div>
 	);
 }
