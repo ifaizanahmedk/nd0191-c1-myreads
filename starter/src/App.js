@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import * as BooksAPI from "./api/BooksAPI";
 import BookList from "./components/Book/BookList";
 import Search from "./components/Search/Search";
+import Error404 from "./components/Error404";
 
 const bookshelf = [
 	{
@@ -63,16 +64,7 @@ function App() {
 						/>
 					}
 				/>
-				<Route
-					path="*"
-					element={
-						<div>
-							<h1 style={{ textAlign: "center" }}>
-								404 Not Found!
-							</h1>
-						</div>
-					}
-				/>
+				<Route path="*" element={<Error404 />} />
 			</Routes>
 		</div>
 	);

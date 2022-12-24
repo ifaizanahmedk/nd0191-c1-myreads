@@ -1,8 +1,16 @@
+# Authors
+
+-   [Faizan Ahmed](https://github.com/ifaizanahmedk)
+
 # MyReads Project
 
-This is the starter template for the final assessment project for Udacity's React Fundamentals course. The goal of this template is to save you time by providing a static example of the CSS and HTML markup that may be used, but without any of the React code that is needed to complete the project. If you choose to start with this template, your job will be to add interactivity to the app by refactoring the static code in this template.
+This is MyReads App for the final assessment project for Udacity's React Fundamentals course which is a part of Udacity React Nano Degree. The goal of this app is to allow you to manage the bookshelf into three categories.
 
-Of course, you are free to start this project from scratch if you wish! Just be sure to use [Create React App](https://reactjs.org/docs/create-a-new-react-app.html) to bootstrap the project.
+-   Currently Reading
+-   Want to Read
+-   Read
+
+To save time, the App uses the starter template code provided by Udacity.
 
 ## TL;DR
 
@@ -18,6 +26,7 @@ To get started developing right away:
 ├── README.md - This file.
 ├── SEARCH_TERMS.md # The whitelisted short collection of available search terms for you to use with your app.
 ├── package.json # npm package manager file. It's unlikely that you'll need to modify this.
+├── .gitignore # List all files / folders that you want to ignore for git
 ├── public
 │   ├── favicon.ico # React Icon, You may change if you wish.
 │   └── index.html # DO NOT MODIFY
@@ -25,10 +34,19 @@ To get started developing right away:
     ├── App.css # Styles for your app. Feel free to customize this as you desire.
     ├── App.js # This is the root of your app. Contains static HTML right now.
     ├── App.test.js # Used for testing. Provided with Create React App. Testing is encouraged, but not required.
-    ├── BooksAPI.js # A JavaScript API for the provided Udacity backend. Instructions for the methods are below.
-    ├── Book.js # A JavaScript API for the provided Udacity backend. Instructions for the methods are below.
-    ├── Bookshelf.js # A JavaScript API for the provided Udacity backend. Instructions for the methods are below.
-    ├── BookShelfChanger.js # A JavaScript API for the provided Udacity backend. Instructions for the methods are below.
+    ├── components
+    │   ├── Book
+    │   │   ├── BooksAPI.js # A JavaScript API for the provided Udacity backend. Instructions for the methods are below.
+    │   │   ├── Book.js # A component that is used to render the Book data i.e. Title, Book Cover, Authors.
+    │   │   ├── Bookshelf.js # Display the Bookshelf as per given categories.
+    │   │   └── BookShelfChanger.js # A changer that allows you to change the shelf of the book.
+    │   └── Search
+    │       ├── Search.js # Manages and display the Search input and results.
+    │       ├── SearchInput.js # Component that handle the search query.
+    │       └── SearchResults.js # Used to render the results of the searched query.
+    ├── helpers
+    │   └── debounce.js # A function that use debounce strategy for Input.
+    ├── Error404.js # Use to display the message 404 Not Found.
     ├── icons # Helpful images for your app. Use at your discretion.
     │   ├── add.svg
     │   ├── arrow-back.svg
