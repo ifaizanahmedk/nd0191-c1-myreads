@@ -4,18 +4,12 @@ const SearchResults = ({ myBooks, bookResults, updateBookShelf }) => {
 	const filteredBooks = bookResults.map((book) => {
 		myBooks.map((b) => {
 			if (b.id === book.id) {
-				console.log(myBooks.shelf);
 				book.shelf = b.shelf;
 			}
 			return b;
 		});
-		console.log("Book Shelf: ", book.shelf);
 		return book;
 	});
-
-	// const handleBookShelfChange = (book, shelf) => {
-	// 	updateBookShelf(book, shelf);
-	// };
 
 	return (
 		<div className="search-books-results">

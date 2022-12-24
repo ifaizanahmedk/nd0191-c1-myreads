@@ -1,3 +1,5 @@
+import debounce from "../../helpers/debounce";
+
 const SearchInput = ({ handleSearchQuery }) => {
 	const handleBookSearch = (event) => {
 		handleSearchQuery(event.target.value);
@@ -7,7 +9,6 @@ const SearchInput = ({ handleSearchQuery }) => {
 		<div className="search-books-input-wrapper">
 			<input
 				type="text"
-				// value=
 				placeholder="Search by title, author, or ISBN"
 				onChange={handleBookSearch}
 			/>
